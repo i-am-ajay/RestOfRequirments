@@ -1,0 +1,8 @@
+username = sgdummytesting@gmail.com
+password = sgrhtesting
+
+mail.smtp.auth = true
+mail.smtp.starttls.enable = true
+mail.smtp.host = gmail.com
+mail.smtp.port = 25
+
