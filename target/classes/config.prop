@@ -3,6 +3,7 @@ password = sgrhtesting
 
 mail.smtp.auth = true
 mail.smtp.starttls.enable = true
-mail.smtp.host = gmail.com
-mail.smtp.port = 25
+mail.smtp.host = smtp.gmail.com
+mail.smtp.port = 465
+
 

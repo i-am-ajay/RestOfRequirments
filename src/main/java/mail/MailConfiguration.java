@@ -11,6 +11,7 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Authenticator;
+import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -37,13 +38,35 @@ public class MailConfiguration {
 		session = Session.getInstance(prop, authenticator); 
 		return session;
 	}
-	public void generateAndSendMessage(String from) throws AddressException, MessagingException{
+	public void generateAndSendMessage(String from, String recipients) throws AddressException, MessagingException{
 		Session session = mailConfigure();
+		// ceate message object
 		Message message = new MimeMessage(session);
+		// set from email address
 		message.setFrom(new InternetAddress(from));
-		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("ajaychandel.1987@gmail.com, "
-				+ "ashok.kumar@gmail.com"));
+		// set addresses of recipients
+		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients));
+		// message subject
+		message.setSubject("Test Message");
+		message.setText("Hello this is just a test message.");
 		
-		
+		// send message
+		Transport.send(message);
+		System.out.println("Message Sent");
+	}
+	
+	public static void main(String [] args){
+		MailConfiguration config = new MailConfiguration();
+		String from = "sgdummytesting@gmail.com";
+		String recipients = "ajaychandel.1987@gmail.com,ajaytranonline@gmail.com";
+		try {
+			config.generateAndSendMessage( from, recipients);
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
